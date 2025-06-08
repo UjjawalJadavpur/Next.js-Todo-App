@@ -1,19 +1,18 @@
 // pages.jsx
-'use client'
+
+'use client';
 import { useState } from "react";
 import TodoItem from "./components/TodoItem";
 import TodoInput from "./components/TodoInput";
-// import TodoInput from "../components/TodoInput";
-// import TodoItem from "../components/TodoItem";
 
 export default function Home() {
+  const [value, setValue] = useState(""); 
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
 
   const addTodo = () => {
-    if (!input.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: input.trim() }]);
-    setInput("");
+    if (!value.trim()) return;
+    setTodos([...todos, { id: Date.now(), text: value.trim() }]);
+    setValue("");
   };
 
   const deleteTodo = (id) => setTodos(todos.filter((t) => t.id !== id));
@@ -25,7 +24,7 @@ export default function Home() {
       <div className="bg-white p-6 w-full max-w-md rounded shadow">
         <h1 className="text-2xl font-bold text-center mb-4">Todo App</h1>
 
-        <TodoInput value={input} onChange={setInput} onAdd={addTodo} />
+        <TodoInput value={value} onChange={setValue} onAdd={addTodo} />
 
         <ul className="space-y-2">
           {todos.map((todo) => (

@@ -1,4 +1,5 @@
-// components/TodoInput.js
+// components/TodoInput.jsx
+
 export default function TodoInput({ value, onChange, onAdd }) {
   return (
     <div className="flex mb-4">
