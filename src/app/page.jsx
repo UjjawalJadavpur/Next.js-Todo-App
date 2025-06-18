@@ -4,20 +4,23 @@
 import { useState } from "react";
 import TodoItem from "./components/TodoItem";
 import TodoInput from "./components/TodoInput";
-
 export default function Home() {
   const [value, setValue] = useState(""); 
   const [todos, setTodos] = useState([]);
 
   const addTodo = () => {
     if (!value.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: value.trim() }]);
+    setTodos([...todos, { id: Date.now(), text: value.trim(), completed: false }]);
     setValue("");
   };
 
   const deleteTodo = (id) => setTodos(todos.filter((t) => t.id !== id));
+
   const updateTodo = (id, text) =>
     setTodos(todos.map((t) => (t.id === id ? { ...t, text } : t)));
+
+  const toggleComplete = (id) =>
+    setTodos(todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)));
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -33,6 +36,7 @@ export default function Home() {
               todo={todo}
               onDelete={deleteTodo}
               onUpdate={updateTodo}
+              onToggleComplete={toggleComplete}
             />
           ))}
         </ul>

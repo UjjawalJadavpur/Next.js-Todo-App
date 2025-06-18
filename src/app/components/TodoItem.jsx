@@ -3,8 +3,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faSave } from "@fortawesome/free-solid-svg-icons";
 
-
-export default function TodoItem({ todo, onDelete, onUpdate }) {
+export default function TodoItem({ todo, onDelete, onUpdate, onToggleComplete }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(todo.text);
 
@@ -15,6 +14,13 @@ export default function TodoItem({ todo, onDelete, onUpdate }) {
 
   return (
     <li className="flex items-center bg-gray-100 p-2 rounded">
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => onToggleComplete(todo.id)}
+        className="mr-2"
+      />
+
       {editing ? (
         <input
           value={text}
@@ -22,7 +28,9 @@ export default function TodoItem({ todo, onDelete, onUpdate }) {
           className="flex-grow border px-2 py-1 rounded mr-2"
         />
       ) : (
-        <span className="flex-grow">{todo.text}</span>
+        <span className={`flex-grow text-lg ${todo.completed ? 'line-through text-gray-500' : ''}`}>
+          {todo.text}
+        </span>
       )}
 
       <button
