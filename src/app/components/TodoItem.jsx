@@ -1,4 +1,5 @@
-// components/TodoItem.js
+// src/app/components/TodoItem.jsx
+
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faSave } from "@fortawesome/free-solid-svg-icons";

@@ -1,4 +1,4 @@
-// components/TodoInput.jsx
+// src/app/components/TodoInput.jsx
 
 export default function TodoInput({ value, onChange, onAdd }) {
   return (
